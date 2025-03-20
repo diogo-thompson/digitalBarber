@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var { middlewareAuthentic } = require('./middlewares/authentication')
 
 var indexRouter = require('./routes/index'); // Tudo sobre site
 var clientsRouter = require('./routes/clients'); //Tudo sobre clientes
@@ -22,8 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/clients', clientsRouter);
-app.use('/appointments', appointmentsRouter);
+app.use('/clients', middlewareAuthentic, clientsRouter);
+app.use('/appointments', middlewareAuthentic, appointmentsRouter);  
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
