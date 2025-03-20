@@ -4,7 +4,7 @@ function middlewareAuthentic(rec, res, next) {
         next()
     } else {
         console.log('A requisição foi barrada pelo middleware de autenticação')
-        res.send('A requisição foi barrada pelo middleware de autenticação')
+        res.render('login')
     }
 }
 
